@@ -44,7 +44,7 @@ halt_statement                = "HALT" | END" | "STOP" .
 
 # Translation of HLA statements to AQA assembly instructions
 
-Most of these should be pretty obvious and will shown by example:
+Most of these should be pretty obvious and will shown be by example:
 
 ```
 R1 = Memory[100]              => LDR    R1, 100
