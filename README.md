@@ -28,8 +28,9 @@ logical_operator              = "AND" | "&" | "OR" | "|" | "XOR" | "^" .   (* "&
 shift_operator                = "<<" | ">>" .
 conditional_operator          = "=" | "==" | "<>" | "!=" | "<" | ">" .     (* "==", "!=" for C#, Java, and Python based HLAs *)
 
+declaration                   = [ label ":" ] "DATA" number .
 statement                     = [ label ":" ] simple_statement .
-simple_statement              = variable_assignment | memory_assignment | arithmetic_statement | not_statement | shift_statement | conditional_statement | goto_statement. 
+simple_statement              = variable_assignment | memory_assignment | arithmetic_statement | not_statement | shift_statement | conditional_statement | goto_statement | halt_statement . 
 variable_assignment           = variable "=" ( memory_reference | number ) .
 memory_assignment             = memory_reference = variable .
 arithmetic_statement          = variable "=" variable arithmetic_operator operand .
@@ -37,9 +38,16 @@ not_statement                 = variable "=" ( "NOT" | "!" ) operand .     (* "!
 shift_statement               = variable shift_operator operand .
 conditional_statement         = "IF" variable conditional_operator operand "GOTO" label .
 goto_statement                = "GOTO" label .
+halt_statement                = "HALT" | END" | "STOP" .
 
 ```
 
+# Translation of HLA statements to AQA assembly instructions
 
-# Contents
+Most of these should be pretty obvious and will shown by example:
+
+```
+R1 = Memory[100]              => LDR    R1, 100
+R2 = Memory[SOURCE]           => LDR    R2, SOURCE
+
 1. 
