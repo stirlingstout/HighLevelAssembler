@@ -64,8 +64,8 @@ Arithmetic statement
 R1 = R1 + R2                  => ADD    R1, R1, R2
 R1 = R1 + 1                   => ADD    R1, R1, #1
 ```
- Not statement
- ```
+Not statement
+```
 R1 = !R2                      => MVN    R1, R2
 R1 = !0                       => MVN    R1, #0
 ```
