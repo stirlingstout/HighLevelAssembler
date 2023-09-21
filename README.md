@@ -44,10 +44,52 @@ halt_statement                = "HALT" | END" | "STOP" .
 
 # Translation of HLA statements to AQA assembly instructions
 
-Most of these should be pretty obvious and will shown be by example:
+Most of these should be pretty obvious and will shown by example.
 
+Notes: All input is converted to UPPERCASE, so r1 and R1 are treated identically, as are Memory, memory, and MEMORY.
+       Spaces and commas are ignored.
+
+Variable assignment
 ```
 R1 = Memory[100]              => LDR    R1, 100
 R2 = Memory[SOURCE]           => LDR    R2, SOURCE
+```
+Memory assignment
+```
+Memory[101] = R2              => STR    R2, 101
+Memory[LEFTDIGIT] = R3        => STR    R3, LEFTDIGIT
+```
+Arithmetic statement
+```
+R1 = R1 + R2                  => ADD    R1, R1, R2
+R1 = R1 + 1                   => ADD    R1, R1, #1
+```
+ Not statement
+ ```
+R1 = !R2                      => MVN    R1, R2
+R1 = !0                       => MVN    R1, #0
+```
+Shift statement
+```
+R1 = R1 << R2                 => LSL    R1, R1, R2
+R1 = R3 >> 4                  => LSR    R1, R3, #4
+```
+Conditional statement: the only HLA statement that compiles to more than one assembly instruction
+```
+IF R1 < R2 GOTO AGAIN         => CMP    R1, R2
+                                 BLT    AGAIN
+IF R3 == 0 GOTO DONE          => CMP    R3, #0
+                                 BEQ    DONE
+```
+Goto statement
+```
+GOTO START                    => B      START
+```
+Halt statement
+```
+HALT                          => HALT
+STOP                          => STOP
+END                           => END
+```
 
-1. 
+
