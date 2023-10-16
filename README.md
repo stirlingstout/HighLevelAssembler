@@ -91,5 +91,9 @@ HALT                          => HALT
 STOP                          => STOP
 END                           => END
 ```
-
-
+Declaration
+```
+DATA number                   => Reserves a memory location and initialises its contents to
+                                 to number
+                                 Executing a DATA location causes an error
+```  
